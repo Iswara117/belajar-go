@@ -5,10 +5,13 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sesi11/auth"
 	"sesi11/database"
 	"sesi11/employee"
+	routerChi "sesi11/infra/router/chi"
 	"sesi11/menu"
 	"sesi11/transactions"
+	"sesi11/utility"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
@@ -37,7 +40,8 @@ func main() {
     }
     // ================
 	router := chi.NewRouter()
-	
+	utility.InitToken("INI_SECRET", 1*60)
+	router.Use(routerChi.Tracer)
 	router.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"*"}, // Atur sumber-sumber yang diizinkan (bisa diganti dengan domain yang spesifik)
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -50,6 +54,7 @@ func main() {
 	menu.Register(router, db)
 	employee.Register(router, db)
 	transactions.Register(router, db)
+	auth.Register(router, db)
 
 	const port = ":8000"
 
