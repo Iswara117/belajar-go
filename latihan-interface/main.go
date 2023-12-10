@@ -36,7 +36,7 @@ func (n Num1) Subtract() float32 {
 
 func main(){
 	num := NewNum1(4.0, 2.0)
-	fmt.Println(&num)
+	fmt.Println(num)
 	fmt.Println(num.Divide())
 	fmt.Println(num.Multiply())
 	fmt.Println(num.Sum())

@@ -1,0 +1,21 @@
+<!-- 
+    ini berfungsi untuk memanggil si layout. 
+    
+-->
+{{template "layout" .}}
+
+<!-- 
+    ini berfungsi untuk memberi tahu ke `layout`, bahwa "main" akan di embed ke layout.
+ -->
+{{define "main"}}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1>{{.Title}}</h1>
+
+        <a href="employees/add" class="btn btn-primary btn-sm">
+            Tambah Employees
+        </a>
+    </div>
+</div>
+
+{{end}}
